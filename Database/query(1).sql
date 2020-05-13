@@ -51,5 +51,39 @@ INSERT INTO Account VALUES('IT2', 'ngoc',0);
 INSERT INTO Account VALUES('IT3', 'thanh',0);
 
 SELECT * FROM Account;
+SELECT * FROM Classes;
+SELECT * FROM Course;
+SELECT * FROM Staff;
+SELECT * FROM Student;
+SELECT * FROM Study;
+SELECT * FROM Teach;
+SELECT * FROM Tuition;
+SELECT * FROM Student;
+
+
+-- STAFF SALARY DISPLAY
+SELECT s.id_staff, s.name_staff, s.salary FROM Staff s;
+
+--STUDENT TUITION FEE DISPLAY
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t WHERE s.tuition_id = t.tuition_id;
+-- UNPAID/PAID STUDENT
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 0;
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 1;
+
+--UNPAID/PAID Student late deadline according to today/ date 25/5/2020
+--Unpaid
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 0 AND t.deadline_date < GETDATE();
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 0 AND t.deadline_date < '2020/5/25';
+--Paid
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 1 AND t.deadline_date < GETDATE();
+SELECT s.roll_no, s.name_student, t.fee, t.deadline_date , t.paid_or_unpaid FROM Student s, Tuition t
+WHERE s.tuition_id = t.tuition_id AND paid_or_unpaid = 1 AND t.deadline_date < '2020/5/25';
+
+
 
 
