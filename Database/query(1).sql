@@ -2,6 +2,8 @@ SELECT * FROM Tuition;
 SELECT * FROM Staff;
 SELECT * FROM Student;
 
+
+ALTER TABLE Student ADD section VARCHAR(20);
 ALTER TABLE Tuition ADD deadline_date DATE;
 
 UPDATE Tuition SET deadline_date = CONVERT(date,'30/05/2020',104) WHERE tuition_id IN('S001','S002','S003','S004');
@@ -9,6 +11,14 @@ UPDATE Tuition SET deadline_date = CONVERT(date,'30/05/2020',104) WHERE tuition_
 UPDATE Tuition SET deadline_date = CONVERT(date,'15/05/2020',104) WHERE tuition_id IN('S005','S006','S007','S010');
 
 UPDATE Tuition SET deadline_date = CONVERT(date,'30/04/2020',104) WHERE tuition_id IN('S008','S009');
+
+UPDATE Student SET section = 'k15' WHERE roll_no LIKE '%15%';
+UPDATE Student SET section = 'k16' WHERE roll_no LIKE '%16%';
+UPDATE Student SET section = 'k17' WHERE roll_no LIKE '%17%';
+UPDATE Student SET section = 'k18' WHERE roll_no LIKE '%18%';
+UPDATE Student SET section = 'k19' WHERE roll_no LIKE '%19%';
+UPDATE Student SET section = 'k13' WHERE roll_no LIKE '%13%';
+UPDATE Student SET section = 'k14' WHERE roll_no LIKE '%14%';
 
 CREATE TABLE Account(
 username VARCHAR(20),
@@ -41,3 +51,5 @@ INSERT INTO Account VALUES('IT2', 'ngoc',0);
 INSERT INTO Account VALUES('IT3', 'thanh',0);
 
 SELECT * FROM Account;
+
+
