@@ -7,7 +7,7 @@ time VARCHAR(10) CHECK(time IN('8 a.m','10 a.m','1 p.m', '3 p.m','none')) DEFAUL
 PRIMARY KEY(class_id),	
 CONSTRAINT FK_CourseClasses
 FOREIGN KEY (subject_code) REFERENCES Course(subject_code) ON UPDATE CASCADE ON DELETE CASCADE,
-CONSTRAINT UC_Class UNIQUE(room_number,weekday)
+CONSTRAINT UC_Class UNIQUE(room_number,weekday,time)
 );
 CREATE TABLE Teach(
 id_staff VARCHAR(20),
