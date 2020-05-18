@@ -194,6 +194,12 @@ ON s.tuition_id = t.tuition_id AND s.roll_no = 'BABAIU15234'
 
 
 
+
+
+
+
+
+
 ---> Student will be having name, roll no, section, class// What is class schedule of a student?
 SELECT s.roll_no,s.name_student, classes.class_id, c.subject_code, c.name_subject, c.credit, classes.room_number, classes.weekday, classes.time 
 FROM Student s, Course c, Classes classes , Study study
