@@ -22,14 +22,14 @@ FOREIGN KEY (subject_code) REFERENCES Course(subject_code) ON UPDATE CASCADE ON 
 CONSTRAINT UC_Class UNIQUE(room_number,weekday,time)
 );
 
-CREATE TABLE Student(roll_no,major,name_student,gender)(
+CREATE TABLE Student(
 roll_no VARCHAR(20),
 major VARCHAR(5),
-name_Student(roll_no,major,name_student,gender) VARCHAR(50),
+name_Student VARCHAR(50),
 gender VARCHAR(20),
 section VARCHAR(20),
 PRIMARY KEY(roll_no),
-CONSTRAINT CHK_gender_Student(roll_no,major,name_student,gender) CHECK(gender IN('Male','Female'))
+CONSTRAINT CHK_gender_Student CHECK(gender IN('Male','Female'))
 );
 
 
@@ -62,8 +62,8 @@ class_id VARCHAR(30) NOT NULL,
 PRIMARY KEY(roll_no,class_id),
 CONSTRAINT FK_ClassesStudy
 FOREIGN KEY (class_id) REFERENCES Classes(class_id) ON UPDATE CASCADE ON DELETE CASCADE,
-CONSTRAINT FK_Student(roll_no,major,name_student,gender)Study
-FOREIGN KEY (roll_no) REFERENCES Student(roll_no,major,name_student,gender)(roll_no) ON UPDATE CASCADE ON DELETE CASCADE	
+CONSTRAINT FK_StudentStudy
+FOREIGN KEY (roll_no) REFERENCES Student(roll_no) ON UPDATE CASCADE ON DELETE CASCADE	
 );
 
 CREATE TABLE Tuition(
@@ -79,7 +79,7 @@ tuition_id INTEGER,
 Amount_per_credit INTEGER,
 Amount INTEGER,
 PRIMARY KEY (roll_no,tuition_id),
-CONSTRAINT FK_Student(roll_no,major,name_student,gender)Pay FOREIGN KEY (roll_no) REFERENCES Student(roll_no,major,name_student,gender)(roll_no) ON UPDATE CASCADE ON DELETE CASCADE,
+CONSTRAINT FK_StudentPay FOREIGN KEY (roll_no) REFERENCES Student(roll_no) ON UPDATE CASCADE ON DELETE CASCADE,
 CONSTRAINT FK_TuitionPay FOREIGN KEY (tuition_id) REFERENCES Tuition(tuition_id) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
@@ -416,3 +416,9 @@ INSERT INTO Account VALUES('IE1', 'batman',0);
 INSERT INTO Account VALUES('IT1', 'duyen',0);
 INSERT INTO Account VALUES('IT2', 'ngoc',0);
 INSERT INTO Account VALUES('IT3', 'thanh',0);
+
+
+
+
+
+--
