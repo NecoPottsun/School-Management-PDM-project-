@@ -430,20 +430,28 @@ INSERT INTO Account VALUES('IT2', 'ngoc',0);
 INSERT INTO Account VALUES('IT3', 'thanh',0);
 
 ---------------------------------------UPDATE DATA QUERIES(used in GUI) example---------------------------------------
+
 ---Change the room_number of class whose id = 'BABA16IU13' from A1-304 to A1-202
 UPDATE Classes SET class_id = 'BABA16IU13', subject_code = 'BAIU02', room_number='A1-202' , weekday='Tuesday', time='8 a.m' WHERE class_id = 'BABA16IU13'
+
 ---Change the credit of course whose id = 'BAIU01' from 2 to 4
 UPDATE course SET subject_code='BAIU01' ,name_subject='Business Analys', credit= 4, major='BA' WHERE subject_code = 'BAIU01'
+
 ---Change the salary of staff whose id_staff = 'BA1' from 45000000 to 50000000
 UPDATE Staff SET name_staff='Bill Gate', gender='male',salary= 50000000 WHERE id_staff = 'BA1';
+
 ---Change the password of account whose username = 'BABAIU15234' from babaiu15234 to 15234
 UPDATE Account SET  username='BABAIU15234',password= '15234' WHERE username= 'BABAIU15234' and password='babaiu15234';
+
 ---Change the gender of student whose roll_no = 'BABAIU15555' from female to male
 UPDATE Student SET  major ='BA', name_student='Captain Marvel', gender='male',section='k15' WHERE roll_no = 'BABAIU15555'
+
 ---Change teacher of a course whose id_staff = 'IT1' from ITIT18IU08 to ITIT18IU08
 UPDATE Teach SET class_id = 'ITIT18IU08' ,id_staff = 'IT1' WHERE id_staff = 'IT1' AND class_id = 'ITIT18IU08'
+
 ---Change tuition status whose tuition_id = 3 FROM unpaid to paid
 UPDATE Tuition SET  paid_or_unpaid=1  WHERE tuition_id= 3
+
 ----Update payment of Pay 
 UPDATE Pay SET 
 Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
@@ -457,14 +465,21 @@ Amount = 0
 WHERE Amount IS NULL;
 
 ---------------------------------------DELETE DATA QUERIES(used in GUI) example---------------------------------------
-DELETE FROM Account WHERE username = ''
-DELETE FROM Account WHERE username = ''
-DELETE FROM Account WHERE username = ''
-DELETE FROM Account WHERE username = ''
-DELETE FROM Account WHERE username = ''
-DELETE FROM Account WHERE username = ''
+
+DELETE FROM Account WHERE username = 'admin1'
+DELETE FROM Classes WHERE class_id = 'MAMA19IU22'
+DELETE FROM Course WHERE subject_code = 'MA03IU'
+DELETE FROM Pay WHERE roll_no = 'ITITUN17008'
+DELETE FROM Staff WHERE id_staff = 'BT2'
+DELETE FROM Student WHERE roll_no = 'ITITUN17008'
+DELETE FROM Study WHERE roll_no = 'ITITIU14785' AND class_id = 'ITIT18IU09'
+DELETE FROM Teach WHERE id_staff = 'MA1' AND class_id = 'MAMA19IU22'
+DELETE FROM Tuition WHERE tuition_id = '12'
+
 
 ---------------------------------------RETRIEVE DATA QUERIES---------------------------------------
+
+----->Normal query display
 SELECT * FROM Account;
 SELECT * FROM Classes;
 SELECT * FROM Course;
@@ -474,3 +489,104 @@ SELECT * FROM Student;
 SELECT * FROM Study;
 SELECT * FROM Teach;
 SELECT * FROM Tuition;
+
+
+-----> Course Information for students to register
+SELECT A2.class_id, c.subject_code, c.name_subject, c.credit, A2.weekday, A2.time, A2.room_number,name_staff FROM Course c
+INNER JOIN (SELECT cl.class_id,cl.subject_code,cl.weekday,cl.time,cl.room_number,A1.name_staff FROM Classes cl,(SELECT t.class_id, s.name_staff FROM Teach t INNER JOIN Staff s ON t.id_staff = s.id_staff) AS A1 
+WHERE cl.class_id = A1.class_id) AS A2
+ON A2.subject_code = c.subject_code 
+
+-----> What is schedule of student whose roll_no = 'BABAIU15234' --- 4
+SELECT s.roll_no,s.name_student, classes.class_id, c.subject_code, c.name_subject, c.credit, classes.room_number, classes.weekday, classes.time
+FROM Student s, Course c, Classes classes , Study study
+WHERE s.roll_no = study.roll_no AND study.class_id = classes.class_id AND classes.subject_code = c.subject_code AND s.roll_no='BABAIU15234'
+
+
+SELECT s2.roll_no, s2.name_student ,B2.class_id, B2.subject_code,B2.name_subject,B2.credit,B2.room_number, B2.weekday, B2.time FROM Student s2
+INNER JOIN (SELECT s1.roll_no,B1.class_id,B1.subject_code,B1.name_subject,B1.credit,B1.room_number,B1.weekday,B1.time FROM Study s1
+			INNER JOIN 
+				(SELECT c1.class_id, c1.room_number,c1.subject_code,c1.time,c1.weekday,c2.name_subject,c2.credit FROM Classes c1 
+				INNER JOIN Course c2 ON c1.subject_code = c2.subject_code) AS B1
+			ON B1.class_id = s1.class_id) AS B2
+ON s2.roll_no = B2.roll_no AND s2.roll_no='BABAIU15234';
+
+
+------>What is tuition fee of student whose roll_no = 'BABAIU15234'?
+SELECT s.roll_no,s.name_student, A.Amount, A.deadline_date, A.paid_or_unpaid FROM Student s
+INNER JOIN (SELECT t.tuition_id,p.roll_no,p.Amount,t.deadline_date,t.paid_or_unpaid FROM Tuition t, Pay p WHERE t.tuition_id = p.tuition_id) AS A
+ON s.roll_no = A.roll_no and s.roll_no='BABAIU15234';
+
+------>What is tuition info of student whose roll_no = 'BABAIU15234'? --- 2
+SELECT s.roll_no,s.name_student, A.Amount, A.deadline_date, A.paid_or_unpaid FROM Student s
+INNER JOIN (SELECT t.tuition_id,p.roll_no,p.Amount,t.deadline_date,t.paid_or_unpaid FROM Tuition t, Pay p WHERE t.tuition_id = p.tuition_id) AS A
+ON s.roll_no = A.roll_no and s.roll_no = 'BABAIU15234';
+
+
+------>Staff will be having their id, name and classes they are teaching // what is class schedule of teacher?
+
+SELECT s.id_staff,s.name_staff, classes.class_id, c.subject_code, c.name_subject, classes.room_number, classes.weekday, classes.time
+FROM Staff s, Course c, Classes classes , Teach t
+WHERE s.id_staff = t.id_staff AND t.class_id= classes.class_id AND classes.subject_code = c.subject_code AND s.id_staff = 'IT1'
+
+
+SELECT s.id_staff, s.name_staff,A2.class_id,A2.subject_code,A2.name_subject,A2.credit,A2.room_number, A2.weekday, A2.time
+FROM Staff s 
+INNER JOIN (SELECT t.id_staff,A1.class_id,A1.subject_code,A1.name_subject,A1.credit, A1.room_number, A1.weekday, A1.time FROM Teach t 
+			INNER JOIN 
+					(SELECT c1.name_subject,c2.class_id,c2.subject_code,c1.credit,c2.room_number,c2.weekday,c2.time FROM Course c1 
+					INNER JOIN  Classes c2 
+					ON c1.subject_code = c2.subject_code) AS A1
+			ON t.class_id = A1.class_id) AS A2
+ON s.id_staff = A2.id_staff AND s.id_staff = 'IT1'
+
+
+------->What is Salary of the staff who has id = 'BA1'?  ---- 2
+SELECT id_staff, name_staff, salary FROM Staff WHERE id_staff = 'BA1';
+
+
+------->Search Staff whose gender is male and name_staff has keyword Lee
+SELECT * FROM Staff WHERE gender IN('male') AND name_staff LIKE '%Lee%';
+
+------->Search Student whose gender is male, section is k15, and name_student has keyword chan
+SELECT * FROM Student WHERE gender IN('male') AND name_student like '%chan%' and section IN ('k15')
+
+------->Filter courses whose major is Physics: class_id, subject_code, name_subject,credit,weekday,time,room_number,staff_name 
+SELECT A2.class_id, c.subject_code, c.name_subject, c.credit, A2.weekday, A2.time, A2.room_number, A2.name_staff FROM Course c
+INNER JOIN (SELECT cl.class_id,cl.subject_code,cl.weekday,cl.time,cl.room_number,A1.name_staff FROM Classes cl,(SELECT t.class_id, s.name_staff FROM Teach t INNER JOIN Staff s ON t.id_staff = s.id_staff) AS A1 
+			WHERE cl.class_id = A1.class_id) AS A2
+ON A2.subject_code = c.subject_code AND c.major = 'PH';
+
+
+
+-----------------------NOT YET USED QUERIES IN GUI-----------------------
+------->List of student in a class order by name_student
+SELECT B2.class_id,B2.subject_code,B2.name_subject,s2.name_student,s2.roll_no  FROM Student s2
+INNER JOIN (SELECT s1.roll_no,B1.class_id,B1.subject_code,B1.name_subject,B1.room_number,B1.weekday,B1.time FROM Study s1
+			INNER JOIN 
+				(SELECT c1.class_id, c1.room_number,c1.subject_code,c1.time,c1.weekday,c2.name_subject,c2.credit FROM Classes c1 
+				INNER JOIN Course c2 ON c1.subject_code = c2.subject_code) AS B1
+			ON B1.class_id = s1.class_id) AS B2
+ON s2.roll_no = B2.roll_no 
+ORDER BY name_student
+
+-------> How many student in a class (order by student_number DESC)?
+SELECT B2.class_id, B2.subject_code, B2.name_subject ,COUNT(B2.class_id) AS student_number FROM Student s2
+INNER JOIN (SELECT s1.roll_no,B1.class_id,B1.subject_code,B1.name_subject,B1.room_number,B1.weekday,B1.time FROM Study s1
+			INNER JOIN 
+				(SELECT c1.class_id, c1.room_number,c1.subject_code,c1.time,c1.weekday,c2.name_subject,c2.credit FROM Classes c1 
+				INNER JOIN Course c2 ON c1.subject_code = c2.subject_code) AS B1
+			ON B1.class_id = s1.class_id) AS B2
+ON s2.roll_no = B2.roll_no 
+GROUP BY B2.class_id,B2.subject_code, B2.name_subject
+ORDER BY student_number DESC
+
+-------> How many classes do students take?
+SELECT s2.roll_no, s2.name_student, COUNT(s2.roll_no) AS registerNo FROM Student s2
+INNER JOIN (SELECT s1.roll_no,B1.class_id,B1.name_subject,B1.room_number,B1.weekday,B1.time FROM Study s1
+			INNER JOIN 
+				(SELECT c1.class_id, c1.room_number,c1.subject_code,c1.time,c1.weekday,c2.name_subject,c2.credit FROM Classes c1 
+				INNER JOIN Course c2 ON c1.subject_code = c2.subject_code) AS B1
+			ON B1.class_id = s1.class_id) AS B2
+ON s2.roll_no = B2.roll_no 
+GROUP BY s2.roll_no, s2.name_student
