@@ -1,5 +1,4 @@
 ---------------------------------------CREATE TABLE QUERIES---------------------------------------
-
 CREATE TABLE Course(
 subject_code VARCHAR(30),
 name_subject VARCHAR(50) NOT NULL,
@@ -32,7 +31,12 @@ PRIMARY KEY(roll_no),
 CONSTRAINT CHK_gender_Student CHECK(gender IN('Male','Female'))
 );
 
+CREATE TABLE Department (major VARCHAR(5), Name VARCHAR(50), PRIMARY KEY(major)); 
+ALTER TABLE Student
+ADD CONSTRAINT FK_DepartmentStudent FOREIGN KEY (major) REFERENCES Department(major);
 
+ALTER TABLE Course
+ADD CONSTRAINT FK_DepartmentCourse FOREIGN KEY (major) REFERENCES Department(major);
 
 CREATE TABLE Staff(
 id_staff VARCHAR(20),
@@ -90,8 +94,16 @@ admin INTEGER CHECK (admin IN(0,1)),
 PRIMARY KEY (username,password)
 );
 
-
 ---------------------------------------INSERT QUERIES---------------------------------------
+----------Department--------- 
+INSERT INTO Department VALUES ('IT','Information Technology');
+INSERT INTO Department VALUES ('BA','Business Administration');
+INSERT INTO Department VALUES ('BT','BioTechnology');
+INSERT INTO Department VALUES ('EE','Electrical Engineering');
+INSERT INTO Department VALUES ('ISE','Industrial Engineering & Management');
+INSERT INTO Department VALUES ('CE','Civil Engineering');
+INSERT INTO Department VALUES ('MA','Mathematics');
+INSERT INTO Department VALUES ('PH','Physics');
 
 ----------Course--------- 
 
@@ -417,8 +429,48 @@ INSERT INTO Account VALUES('IT1', 'duyen',0);
 INSERT INTO Account VALUES('IT2', 'ngoc',0);
 INSERT INTO Account VALUES('IT3', 'thanh',0);
 
+---------------------------------------UPDATE DATA QUERIES(used in GUI) example---------------------------------------
+---Change the room_number of class whose id = 'BABA16IU13' from A1-304 to A1-202
+UPDATE Classes SET class_id = 'BABA16IU13', subject_code = 'BAIU02', room_number='A1-202' , weekday='Tuesday', time='8 a.m' WHERE class_id = 'BABA16IU13'
+---Change the credit of course whose id = 'BAIU01' from 2 to 4
+UPDATE course SET subject_code='BAIU01' ,name_subject='Business Analys', credit= 4, major='BA' WHERE subject_code = 'BAIU01'
+---Change the salary of staff whose id_staff = 'BA1' from 45000000 to 50000000
+UPDATE Staff SET name_staff='Bill Gate', gender='male',salary= 50000000 WHERE id_staff = 'BA1';
+---Change the password of account whose username = 'BABAIU15234' from babaiu15234 to 15234
+UPDATE Account SET  username='BABAIU15234',password= '15234' WHERE username= 'BABAIU15234' and password='babaiu15234';
+---Change the gender of student whose roll_no = 'BABAIU15555' from female to male
+UPDATE Student SET  major ='BA', name_student='Captain Marvel', gender='male',section='k15' WHERE roll_no = 'BABAIU15555'
+---Change teacher of a course whose id_staff = 'IT1' from ITIT18IU08 to ITIT18IU08
+UPDATE Teach SET class_id = 'ITIT18IU08' ,id_staff = 'IT1' WHERE id_staff = 'IT1' AND class_id = 'ITIT18IU08'
+---Change tuition status whose tuition_id = 3 FROM unpaid to paid
+UPDATE Tuition SET  paid_or_unpaid=1  WHERE tuition_id= 3
+----Update payment of Pay 
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 1)
+)
+WHERE tuition_id = 1 ;
+UPDATE PAY SET 
+Amount = 0 
+WHERE Amount IS NULL;
 
+---------------------------------------DELETE DATA QUERIES(used in GUI) example---------------------------------------
+DELETE FROM Account WHERE username = ''
+DELETE FROM Account WHERE username = ''
+DELETE FROM Account WHERE username = ''
+DELETE FROM Account WHERE username = ''
+DELETE FROM Account WHERE username = ''
+DELETE FROM Account WHERE username = ''
 
-
-
---
+---------------------------------------RETRIEVE DATA QUERIES---------------------------------------
+SELECT * FROM Account;
+SELECT * FROM Classes;
+SELECT * FROM Course;
+SELECT * FROM Pay;
+SELECT * FROM Staff;
+SELECT * FROM Student;
+SELECT * FROM Study;
+SELECT * FROM Teach;
+SELECT * FROM Tuition;
