@@ -12,6 +12,8 @@ INSERT INTO Course VALUES ('IT11IU','Introduction to Artificial Intelligence LAB
 INSERT INTO Course VALUES('PH03IU','Physics 3', 4); 
 INSERT INTO Course VALUES('PH01IU','Physics 1', 2);
 
+
+
 --after add major into course
 UPDATE Course SET 
 major = 'IT'
@@ -22,6 +24,19 @@ major = 'PH'
 WHERE subject_code LIKE 'PH%';
 
 
+INSERT INTO Course VALUES('BAIU01','Business Analys',2,'BA');
+INSERT INTO Course VALUES('BAIU02','Human Management',4,'BA');
+INSERT INTO Course VALUES('EEIU01','Materials',4,'EE');
+INSERT INTO Course VALUES('EEIU02','Achitect',2,'EE');
+INSERT INTO Course VALUES('BTIU01','Medicine',2,'BT');
+INSERT INTO Course VALUES('BTIU02','Device',4,'BT');
+INSERT INTO Course VALUES('CEIU01','Computer Edit',2,'CE');
+INSERT INTO Course VALUES('CEIU02','Teamwork',4,'CE');
+INSERT INTO Course VALUES('ISEIU01','Dance',2,'ISE');
+INSERT INTO Course VALUES('ISEIU02','How to represent',4,'ISE');
+INSERT INTO Course VALUES ('MA01IU','Calculus 1',4,'MA');
+INSERT INTO Course VALUES ('MA02IU','Calculus 2',4,'MA');
+INSERT INTO Course VALUES ('MA03IU','Calculus 3',4,'MA');
 
 ----------Classes---------(done)
 
@@ -37,6 +52,19 @@ INSERT INTO Classes VALUES('ITIT17IU10','IT10IU','A2-301','Sunday','8 a.m');
 INSERT INTO Classes VALUES ('ITIT17IU11','IT11IU','LA1-607','Friday','8 a.m');
 INSERT INTO Classes VALUES('ITIT18IU03','PH03IU','A1-403','Tuesday', '1 p.m'); 
 INSERT INTO Classes VALUES('ITIT19IU01','PH01IU','A2-408','Wednesday', '1 p.m');
+INSERT INTO Classes VALUES ('BABA17IU12','BAIU01','A1-206','Monday','8 a.m');
+INSERT INTO Classes VALUES ('BABA16IU13','BAIU02','A1-304','Tuesday','8 a.m');
+INSERT INTO Classes VALUES ('BTBT17IU14','BTIU01','A1-506','Friday','1 p.m');
+INSERT INTO Classes VALUES ('BTBT19IU15','BTIU02','A1-402','Saturday','1 p.m');
+INSERT INTO Classes VALUES ('CECE18IU16','CEIU01','A2-302','Monday','8 a.m');
+INSERT INTO Classes VALUES ('CECE19IU17','CEIU02','A2-203','Thursday','1 p.m');
+INSERT INTO Classes VALUES ('EEEE19IU18','EEIU01','A2-206','Wednesday','8 a.m');
+INSERT INTO Classes VALUES ('EEEE17IU19','EEIU02','A2-314','Friday','8 a.m');
+INSERT INTO Classes VALUES ('ISEIU18IU20','ISEIU01','A1-307','Thursday','1 p.m');
+INSERT INTO Classes VALUES ('ISEIU19IU21','ISEIU02','A2-413','Tuesday','8 a.m');
+INSERT INTO Classes VALUES ('MAMA19IU22','MA01IU','A1-403','Tuesday','8 a.m');
+INSERT INTO Classes VALUES ('MAMA18IU23','MA02IU','A2-303','Wednesday','1 p.m');
+INSERT INTO Classes VALUES ('MAMA18IU24','MA03IU','A2-205','Monday','1 p.m');
 
 
 ----------Student---------(done)
@@ -180,6 +208,10 @@ INSERT INTO Staff VALUES ('BT1','Bruce Lee', 'male',67000000);
 INSERT INTO Staff VALUES ('IE1','Batman', 'male',66000000);
 INSERT INTO Staff VALUES ('CE1','Narkoth', 'male',64000000);
 INSERT INTO Staff VALUES ('BT2','Yena', 'female',40000000);
+INSERT INTO Staff VALUES('EE1','Azula','female',47000000);
+INSERT INTO Staff VALUES('EE2','Zuko','male',55000000);
+INSERT INTO Staff VALUES('ISE1','Mika','female',64000000);
+INSERT INTO Staff VALUES('MA1','Kuro','male',64000000);
 
 ----------Teach--------- (done)
 
@@ -193,7 +225,19 @@ INSERT INTO Teach VALUES('BT1','ITIT17IU04');
 INSERT INTO Teach VALUES('IE1','ITIT18UN05');
 INSERT INTO Teach VALUES('CE1','ITIT18IU08');
 INSERT INTO Teach VALUES('CE1','ITIT19IU01');
-
+INSERT INTO Teach VALUES('BA1','BABA17IU12');
+INSERT INTO Teach VALUES('BA1','BABA16IU13');
+INSERT INTO Teach VALUES('BT1','BTBT19IU15');
+INSERT INTO Teach VALUES('CE1','CECE19IU17');
+INSERT INTO Teach VALUES('CE1','CECE18IU16');
+INSERT INTO Teach VALUES('IE1','ISEIU18IU20');
+INSERT INTO Teach VALUES('EE1','EEEE17IU19');
+INSERT INTO Teach VALUES('EE2','EEEE19IU18');
+INSERT INTO Teach VALUES('IT2','ISEIU19IU20');
+INSERT INTO Teach VALUES('ISE1','ISEIU19IU21');
+INSERT INTO Teach VALUES('MA1','MAMA19IU22');
+INSERT INTO Teach VALUES('MA1','MAMA18IU23');
+INSERT INTO Teach VALUES('MA1','MAMA18IU24');
 
 
 ----------Account--------- (done)

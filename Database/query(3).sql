@@ -30,10 +30,6 @@ ORDER BY student_number DESC
 
 
 --->
-SELECT * FROM Student;
-SELECT * FROM Study;
-INSERT INTO Student(roll_no,major,name_student,gender,section) VALUES('ITITUN17007','IT','Susaka Ishiki','Female', 'k17')
-INSERT INTO Student(roll_no,major,name_student,gender,section) VALUES('ITITUN17008','IT','Sawano Hiroyuki','Male', 'k17')
 
 SELECT Student.name_student, Study.class_id
 FROM Student
