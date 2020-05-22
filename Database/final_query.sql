@@ -497,7 +497,7 @@ INNER JOIN (SELECT cl.class_id,cl.subject_code,cl.weekday,cl.time,cl.room_number
 WHERE cl.class_id = A1.class_id) AS A2
 ON A2.subject_code = c.subject_code 
 
------> What is schedule of student whose roll_no = 'BABAIU15234' --- 4
+-----> What is schedule of student whose roll_no = 'BABAIU15234' --- appear 4 times
 SELECT s.roll_no,s.name_student, classes.class_id, c.subject_code, c.name_subject, c.credit, classes.room_number, classes.weekday, classes.time
 FROM Student s, Course c, Classes classes , Study study
 WHERE s.roll_no = study.roll_no AND study.class_id = classes.class_id AND classes.subject_code = c.subject_code AND s.roll_no='BABAIU15234'
@@ -517,7 +517,7 @@ SELECT s.roll_no,s.name_student, A.Amount, A.deadline_date, A.paid_or_unpaid FRO
 INNER JOIN (SELECT t.tuition_id,p.roll_no,p.Amount,t.deadline_date,t.paid_or_unpaid FROM Tuition t, Pay p WHERE t.tuition_id = p.tuition_id) AS A
 ON s.roll_no = A.roll_no and s.roll_no='BABAIU15234';
 
------->What is tuition info of student whose roll_no = 'BABAIU15234'? --- 2
+------>What is tuition info of student whose roll_no = 'BABAIU15234'? --- apppear 2 times
 SELECT s.roll_no,s.name_student, A.Amount, A.deadline_date, A.paid_or_unpaid FROM Student s
 INNER JOIN (SELECT t.tuition_id,p.roll_no,p.Amount,t.deadline_date,t.paid_or_unpaid FROM Tuition t, Pay p WHERE t.tuition_id = p.tuition_id) AS A
 ON s.roll_no = A.roll_no and s.roll_no = 'BABAIU15234';
@@ -541,7 +541,7 @@ INNER JOIN (SELECT t.id_staff,A1.class_id,A1.subject_code,A1.name_subject,A1.cre
 ON s.id_staff = A2.id_staff AND s.id_staff = 'IT1'
 
 
-------->What is Salary of the staff who has id = 'BA1'?  ---- 2
+------->What is Salary of the staff who has id = 'BA1'?  ---- appear 2 times
 SELECT id_staff, name_staff, salary FROM Staff WHERE id_staff = 'BA1';
 
 
