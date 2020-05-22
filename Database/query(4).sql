@@ -57,6 +57,7 @@ INSERT INTO Student VALUES(...);
 INSERT INTO Tuition(paid_or_unpaid) VALUES(0,'30/05/2020');
 INSERT INTO Pay(roll_no,tuition_id,Amount_per_credit) VALUES ('',AN INTEGER,1000000);
 INSERT INTO Admin VALUES(..,0); --- CREATE NEW ACCOUNT FOR STUDENT WITH USERNAME AND PASSWORD ARE HIS/HER ROLL_NO
+
 UPDATE Pay SET 
 Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
 SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
@@ -94,7 +95,7 @@ SELECT * FROM Tuition;
 SELECT * FROM Pay;
 SELECT s.roll_no,s.name_student, A.Amount, A.deadline_date, A.paid_or_unpaid FROM Student s
 INNER JOIN (SELECT t.tuition_id,p.roll_no,p.Amount,t.deadline_date,t.paid_or_unpaid FROM Tuition t, Pay p WHERE t.tuition_id = p.tuition_id) AS A
-ON s.roll_no = A.roll_no;
+ON s.roll_no = A.roll_no and roll_no='';
 
 
 --SELECT s.roll_no, A1.credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
