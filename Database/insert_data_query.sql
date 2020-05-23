@@ -1,3 +1,5 @@
+---------------------------------------INSERT QUERIES---------------------------------------
+
 ----------Course--------- (done)
 
 INSERT INTO Course VALUES('IT01IU','Principle Database Management',2);
@@ -79,6 +81,18 @@ INSERT INTO Student VALUES('CECEIU17878','CE','Lionel Messi','Male','S008');
 INSERT INTO Student VALUES('IEIEIU19236','ISE','Cristiano Ronaldo','Male','S009');
 INSERT INTO Student VALUES('BTBTIU18649','BT','Edogawa Conan','Male','S010');
 
+SELECT * FROM Student;
+INSERT INTO Student VALUES('ITITIU13232','IT','Donald Trump','Male');
+INSERT INTO Student VALUES('ITITIU14785','IT','Barack Obama','Male');
+INSERT INTO Student VALUES('BABAIU15555','BA','Captain Marvel','Female');
+INSERT INTO Student VALUES('CECEIU16542','CE','Iron Man','Male');
+INSERT INTO Student VALUES('IEIEIU18456','ISE','Hello Kitty','Female');
+INSERT INTO Student VALUES('BTBTIU17562','BT','Kim Jong Un','Male');
+INSERT INTO Student VALUES('BABAIU15234','BA','Jackie Chan','Male');
+INSERT INTO Student VALUES('CECEIU17878','CE','Lionel Messi','Male');
+INSERT INTO Student VALUES('IEIEIU19236','ISE','Cristiano Ronaldo','Male');
+INSERT INTO Student VALUES('BTBTIU18649','BT','Edogawa Conan','Male');
+
 ALTER TABLE Student DROP tuition_id;
 --after rename section to major
 ALTER TABLE Student ADD section VARCHAR(20);
@@ -109,18 +123,97 @@ INSERT INTO Pay(roll_no,tuition_id,Amount_per_credit) VALUES('ITITIU14785',10,10
 INSERT INTO Pay(roll_no,tuition_id,Amount_per_credit) VALUES('ITITUN17007',11,6000000);
 INSERT INTO Pay(roll_no,tuition_id,Amount_per_credit) VALUES('ITITUN17008',12,6000000);
 
+
+----Update payment for students----------
 UPDATE Pay SET 
 Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
 SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
 GROUP BY s.roll_no) 
-AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = ...)
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 1)
 )
-WHERE tuition_id = ... ;
+WHERE tuition_id = 1 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 2)
+)
+WHERE tuition_id = 2 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 3)
+)
+WHERE tuition_id = 3 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 4)
+)
+WHERE tuition_id = 4 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 5)
+)
+WHERE tuition_id = 5 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 6)
+)
+WHERE tuition_id = 6 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 7)
+)
+WHERE tuition_id = 7 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 8)
+)
+WHERE tuition_id = 8 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 9)
+)
+WHERE tuition_id = 9 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 10)
+)
+WHERE tuition_id = 10 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 11)
+)
+WHERE tuition_id = 11 ;
+UPDATE Pay SET 
+Amount = ( Amount_per_credit* (SELECT A2.Total_credit FROM Pay p INNER JOIN (
+SELECT s.roll_no, SUM(A1.credit) AS Total_credit FROM Study s, (SELECT c1.class_id,c2.subject_code,c2.credit FROM Classes c1,Course c2 WHERE c1.subject_code = c2.subject_code) AS A1 WHERE s.class_id = A1.class_id 
+GROUP BY s.roll_no) 
+AS A2 ON A2.roll_no = p.roll_no AND p.tuition_id = 12)
+)
+WHERE tuition_id = 12 ;
+
 
 UPDATE PAY SET 
 Amount = 0 
 WHERE Amount IS NULL;
-
 
 ----------Tuition--------- (done)
 
@@ -244,16 +337,16 @@ INSERT INTO Teach VALUES('MA1','MAMA18IU24');
 INSERT INTO Account VALUES('admin', 'a123',1);
 INSERT INTO Account VALUES('admin1', 'a234',1);
 
-INSERT INTO Account VALUES('BABAIU15234', 'baiu15234',0);
-INSERT INTO Account VALUES('BABAIU15555', 'baiu15555',0);
-INSERT INTO Account VALUES('BTBTIU17562', 'btiu17562',0);
-INSERT INTO Account VALUES('BTBTIU18649', 'btiu18649',0);
-INSERT INTO Account VALUES('CECEIU16542', 'ceiu16542',0);
-INSERT INTO Account VALUES('CECEIU17878', 'ceiu17878',0);
-INSERT INTO Account VALUES('IEIEIU18456', 'ieiu18456',0);
-INSERT INTO Account VALUES('IEIEIU19236', 'ieiu19236',0);
-INSERT INTO Account VALUES('ITITIU13232', 'itiu13232',0);
-INSERT INTO Account VALUES('ITITIU14785', 'itiu14785',0);
+INSERT INTO Account VALUES('BABAIU15234', LOWER('BABAIU15234'),0);
+INSERT INTO Account VALUES('BABAIU15555', LOWER('BABAIU15555'),0);
+INSERT INTO Account VALUES('BTBTIU17562', LOWER('BTBTIU17562'),0);
+INSERT INTO Account VALUES('BTBTIU18649', LOWER('BTBTIU18649'),0);
+INSERT INTO Account VALUES('CECEIU16542', LOWER('CECEIU16542'),0);
+INSERT INTO Account VALUES('CECEIU17878', LOWER('CECEIU17878'),0);
+INSERT INTO Account VALUES('IEIEIU18456', LOWER('IEIEIU18456'),0);
+INSERT INTO Account VALUES('IEIEIU19236', LOWER('IEIEIU19236'),0);
+INSERT INTO Account VALUES('ITITIU13232', LOWER('ITITIU13232'),0);
+INSERT INTO Account VALUES('ITITIU14785', LOWER('ITITIU14785'),0);
 
 INSERT INTO Account VALUES('BA1', 'billgate',0);
 INSERT INTO Account VALUES('BT1', 'brucelee',0);
